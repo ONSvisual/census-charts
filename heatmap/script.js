@@ -186,22 +186,14 @@ svg.append('g')
     .attr('width', x.bandwidth())
     .attr('height', y.bandwidth())
 .on('mouseover', function(d) {
-      let dataValue = d3.select(this).data()[0].value;
-      let displayText = dataValue === "NaN" ? "No data" : d3.format(config.essential.dataLabelsNumberFormat)(dataValue);
-      
-      d3.select('#keytext')
-        .text(displayText)
-        .transition()
-        .attr('x', dataValue === "NaN" ? 0 : legendx(+dataValue))
-
-      d3.select('#keysymbol path')
-        .attr('opacity', dataValue === "NaN" ? 0 : 1)
-
-      d3.select('#keysymbol')
-        .transition()
-        .attr('transform', dataValue === "NaN" ? 'translate(0,0)' : 'translate(' + legendx(+dataValue) + ',0)')
-    })
-
+  let dataValue = d3.select(this).data()[0].value;
+  let displayText = isNaN(dataValue) || dataValue === null ? "No data" : d3.format(config.essential.dataLabelsNumberFormat)(dataValue);
+  
+  d3.select('#keytext')
+    .text(displayText)
+    .transition()
+    .attr('x', isNaN(dataValue) || dataValue === null ? 0 : legendx(+dataValue))
+})
     .on("mouseout", mouseout)
 
 svg.append('g')
