@@ -176,42 +176,46 @@ function drawGraphic() {
     .call(yAxis)
     .selectAll('text').call(wrap, margin.left - 10)
 
-  svg.append('g')
+svg.append('g')
     .selectAll('rect')
     .data(dataPivoted)
     .join('rect')
-    .attr('fill', d => colour(+d.value))
+    .attr('fill', d => isNaN(d.value) || d.value === null ? "#cccccc" : colour(+d.value))
     .attr('x', d => x(d.region))
     .attr('y', d => y(d.name))
     .attr('width', x.bandwidth())
     .attr('height', y.bandwidth())
-    .on('mouseover', function(d) {
+.on('mouseover', function(d) {
+      let dataValue = d3.select(this).data()[0].value;
+      let displayText = dataValue === "NaN" ? "No data" : d3.format(config.essential.dataLabelsNumberFormat)(dataValue);
+      
       d3.select('#keytext')
-        .text(d3.format(config.essential.dataLabelsNumberFormat)(d3.select(this).data()[0].value))
+        .text(displayText)
         .transition()
-        .attr('x', legendx(+d3.select(this).data()[0].value))
+        .attr('x', dataValue === "NaN" ? 0 : legendx(+dataValue))
 
       d3.select('#keysymbol path')
-        .attr('opacity', 1)
+        .attr('opacity', dataValue === "NaN" ? 0 : 1)
 
       d3.select('#keysymbol')
         .transition()
-        .attr('transform', 'translate(' + legendx(+d3.select(this).data()[0].value) + ',0)')
+        .attr('transform', dataValue === "NaN" ? 'translate(0,0)' : 'translate(' + legendx(+dataValue) + ',0)')
     })
+
     .on("mouseout", mouseout)
 
-  svg.append('g')
+svg.append('g')
     .selectAll('text')
     .data(dataPivoted)
     .join('text')
     .attr('class', 'dataLabels')
-    .attr('fill', d => d.value >= breaks[2] ? "#ffffff" : "#414042")
+    .text(d => isNaN(d.value) || d.value === null ? "NA" : d3.format(config.essential.dataLabelsNumberFormat)(d.value))
     .attr('x', d => x(d.region))
     .attr('dx', x.bandwidth() / 2)
     .attr('y', d => y(d.name))
     .attr('dy', y.bandwidth() / 2 + 4)
     .attr('text-anchor', 'middle')
-    .text(d => d3.format(config.essential.dataLabelsNumberFormat)(d.value))
+    .text(d => isNaN(d.value) || d.value === null ? "NA" : d3.format(config.essential.dataLabelsNumberFormat)(d.value))
     .attr("pointer-events", "none")
 
   //create link to source
