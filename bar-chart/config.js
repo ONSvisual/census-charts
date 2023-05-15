@@ -47,5 +47,4 @@ config={
     "mediumBreakpoint": 600
   },
   "elements":{"select":0, "nav":0, "legend":0, "titles":0},
-  "chart_build":{}
 };
