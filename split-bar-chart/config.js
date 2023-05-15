@@ -15,19 +15,5 @@ config = {
   "sourceText":"Office for National Statistics – Census 2021",
   "threshold_sm":500
 },
-//Don't adjust this part - it only affects the chart build tool
-"chart_build":{
-  "graphic_data_url":"text",
-  "colour_palette_type":"radio",
-  "colour_palette_type_options":["mono","divergent","categorical"],
-  "colour_palette_colours": "colour",
-  "colour_palette_colours_options": ["#206095","#27A0CC","#871A5B","#A8BD3A","#F66068"],
-  "numberFormat":"dThreeFormat",
-  "numberFormat_options":[".0f"],
-  "rowWidth":"number",
-  "accessibleSummary":"textarea",
-  "sourceText":"text",
-  "threshold_sm":"number"
-},
 "elements":{"select":0, "nav":0, "legend":0, "titles":0}
 };
