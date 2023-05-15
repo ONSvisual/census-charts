@@ -46,5 +46,6 @@ config={
     "mobileBreakpoint": 510,
     "mediumBreakpoint": 600
   },
-  "elements":{"select":0, "nav":0, "legend":0, "titles":0},
+  //future functionality for chart builder - changing values will have no impact on charts when coding manually.
+"elements":{"select":0, "nav":0, "legend":0, "titles":0},
 };
