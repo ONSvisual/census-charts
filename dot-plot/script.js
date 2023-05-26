@@ -96,9 +96,6 @@ function drawGraphic() {
           .attr('class', 'zero-line')
             };
       })
-
-
-
   svg
     .append('g')
     .attr('class', 'y axis')
@@ -106,9 +103,9 @@ function drawGraphic() {
     .attr('stroke-dasharray','2 2')
     .selectAll('text').call(wrap,margin.left-5);
 
-  svg.selectAll('circle.min')
+    svg.selectAll('circle.min') 
     .data(graphic_data)
-    .enter()
+    .enter()  
     .append('circle')
     .attr('class', 'min')
     .attr('r', 6)
@@ -117,7 +114,7 @@ function drawGraphic() {
       return x(d.min)
     })
     .attr('cy', function(d) {
-      return y(d.name)
+      return Math.abs(x(d.max)-x(d.min))<2?y(d.name)-3:y(d.name)
     })
 
   svg.selectAll('circle.max')
@@ -131,13 +128,47 @@ function drawGraphic() {
       return x(d.max)
     })
     .attr('cy', function(d) {
-      return y(d.name)
+      return Math.abs(x(d.max)-x(d.min))<2?y(d.name)+3:y(d.name)
     })
+
+    //create data labels if switched on in config file
+    if(config.essential.dataLabels.show==true){
+      svg.selectAll('text.dataLabels')
+      .data(graphic_data)
+      .join('text')
+      .attr('class','dataLabels')
+      .attr('x',(d) => x(d.min)+12)
+      .attr('y',(d)=> y(d.name)+5)
+      .text((d)=>d3.format(config.essential.dataLabels.numberFormat)(d.min)+"%")
+      .attr('fill', config.essential.colour_palette[0])
+      .style("font-size", "14px")
+      .style("font-weight", 600)
+    }//end if for datalabels
+
+    if(config.essential.dataLabels1.show==true){
+      svg.selectAll('text.dataLabels1')
+      .data(graphic_data)
+      .join('text')
+      .attr('class','dataLabels1')
+      .text((d)=>d3.format(config.essential.dataLabels.numberFormat)(d.max)+"%")
+      .attr('fill', config.essential.colour_palette[1])
+      .style("font-size", "14px")
+      .style("font-weight", 600)
+      .attr('y', function(d) {
+        return Math.abs(d.max -d.min)<0.03 && Math.abs(x(d.max)-x(d.min))<2?y(d.name)+5:y(d.name)+5
+        })
+      .attr('x', function(d) {
+      return Math.abs(d.max -d.min)<0.03 && Math.abs(x(d.max)-x(d.min))<2 ? x(d.max)+37: d.min>0.1 ? x(d.max)-37 : x(d.max)-30
+      })
+}//end if for datalabels
+
+
+
 
 
   //create link to source
   d3.select("#source")
-    .text("Source – " + config.essential.sourceText)
+    .text("Source: " + config.essential.sourceText)
 
   //use pym to calculate chart dimensions
   if (pymChild) {

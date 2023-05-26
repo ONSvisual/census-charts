@@ -5,8 +5,17 @@ config={
     "colour_palette": ["#A09FA0", "#206095"],
     "sourceText": "Office for National Statistics",
     "accessibleSummary":"Chart showing death rates due to alchohol by regions, for males, females and all.",
-    "xDomain":"auto"
     // either auto or a custom domain as an array e.g [0,100]
+    "xDomain":"auto",
+    //data labels for min and max values either "show":true, or "show":false,
+    "dataLabels":{
+      "show":true,
+      "numberFormat":".0f"
+    },
+    "dataLabels1":{
+      "show":true,
+      "numberFormat":".0%"
+    },
   },
   "optional": {
     "margin": {
