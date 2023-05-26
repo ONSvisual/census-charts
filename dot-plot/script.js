@@ -143,9 +143,7 @@ function drawGraphic() {
       .attr('fill', config.essential.colour_palette[0])
       .style("font-size", "14px")
       .style("font-weight", 600)
-    }//end if for datalabels
 
-    if(config.essential.dataLabels1.show==true){
       svg.selectAll('text.dataLabels1')
       .data(graphic_data)
       .join('text')
@@ -160,7 +158,9 @@ function drawGraphic() {
       .attr('x', function(d) {
       return Math.abs(d.max -d.min)<0.03 && Math.abs(x(d.max)-x(d.min))<2 ? x(d.max)+37: d.min>0.1 ? x(d.max)-37 : x(d.max)-30
       })
-}//end if for datalabels
+    }//end if for datalabels
+
+
 
 
 

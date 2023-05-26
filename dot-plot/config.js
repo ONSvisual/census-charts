@@ -12,10 +12,6 @@ config={
       "show":true,
       "numberFormat":".0f"
     },
-    "dataLabels1":{
-      "show":true,
-      "numberFormat":".0%"
-    },
   },
   "optional": {
     "margin": {
