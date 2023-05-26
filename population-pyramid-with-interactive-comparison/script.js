@@ -297,6 +297,10 @@ function drawGraphic() {
   d3.select("#source")
     .text("Source: " + config.essential.sourceText)
 
+    // create text for buttons
+    d3.select("#explanation")
+    .text("Select population for comparison")
+
   //use pym to calculate chart dimensions
   if (pymChild) {
     pymChild.sendHeight();
