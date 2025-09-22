@@ -1,3 +1,5 @@
+**IMPORTANT! This repo is superseded by [Charts](https://github.com/ONSdigital/Charts)**
+
 High quality chart templates that are ready for Census 2021, and that follow the [example charts in the style guide](https://ons-design.notion.site/Chart-types-e916b8337b064aab9d4ee0db0f56eb86)
 
 ## Charts made so far
