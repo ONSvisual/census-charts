@@ -15,6 +15,15 @@ div#titles {
     flex-direction: row;
 }
 
+#explanation {
+    font-weight:600;
+    font-size: 14px;
+    margin: 10px 0 10px 3px;
+    color: #206095;
+​
+​
+}
+
 /* buttons */
 fieldset {
     border: none;
